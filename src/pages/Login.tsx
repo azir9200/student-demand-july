@@ -5,6 +5,7 @@ import { useAppDispatch } from "../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "./utils/verifyToken";
+import { toast } from "sonner";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,9 +17,10 @@ const Login = () => {
     },
   });
 
-  const [login, { error }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("Loading to your wishing page !");
     try {
       const userInfo = {
         id: data.id,
@@ -26,12 +28,16 @@ const Login = () => {
       };
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.accessToken);
-      console.log("Azir => 123", user);
 
       dispatch(setUser({ user: user, token: res.data.accessToken }));
-
-      console.log(res);
+      toast.success("Logged In", { id: toastId, duration: 2000 });
+      // navigate(`/${user.role}/dashboard`);
+      navigate("/");
     } catch (err) {
+      toast.error("Something went wrong ! Bello", {
+        id: toastId,
+        duration: 2000,
+      });
       console.log(err);
     }
   };
