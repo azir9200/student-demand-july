@@ -27,12 +27,14 @@ const Login = () => {
         password: data.password,
       };
       const res = await login(userInfo).unwrap();
+      console.log("testing =>", res);
       const user = verifyToken(res.data.accessToken);
+      console.log("user azir =>", user);
 
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged In", { id: toastId, duration: 2000 });
-      // navigate(`/${user.role}/dashboard`);
-      navigate("/");
+      navigate(`/${user.role}/dashboard`);
+      // navigate("/");
     } catch (err) {
       toast.error("Something went wrong ! Bello", {
         id: toastId,
