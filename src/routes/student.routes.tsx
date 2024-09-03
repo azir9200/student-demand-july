@@ -3,12 +3,12 @@ import StudentDashboard from "../pages/student/StudentDashboard";
 
 export const studentPaths = [
   {
-    name: "Dashboard",
+    name: "Student Dashboard",
     path: "dashboard",
     element: <StudentDashboard />,
   },
   {
-    name: "Offered Course",
+    name: "Student Offered Course",
     path: "offered-course",
     element: <OfferedCourse />,
   },
