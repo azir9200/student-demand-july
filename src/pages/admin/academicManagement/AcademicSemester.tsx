@@ -1,13 +1,19 @@
 import { useGetAllSemestersQuery } from "../../../redux/features/academicSemester/academicSemesterApi";
+import AcademicSemesterCard from "./AcademicSemesterCard";
 
 const AcademicSemester = () => {
-  const { data } = useGetAllSemestersQuery(undefined);
+  const { data: semesters } = useGetAllSemestersQuery(undefined);
 
-  console.log(data);
+  console.log("all azi", semesters);
 
   return (
-    <div>
-      <h1> This is AcademicSemester component </h1>
+    <div className="container">
+      <h1 className="text-4xl font-bold my-10">Academic Semesters</h1>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
+        {semesters?.data?.map((semester) => (
+          <AcademicSemesterCard key={semester.id} semester={semester} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useGetAllStudentsQuery } from "../../../redux/student/studentApi";
+import { useGetAllStudentsQuery } from "../../../redux/features/student/studentApi";
 
 const Student = () => {
   const { data } = useGetAllStudentsQuery(undefined);
